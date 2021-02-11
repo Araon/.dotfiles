@@ -1,0 +1,6 @@
+; camorama GtkAccelMap rc-file         -*- scheme -*-
+; this file is an automated accelerator map dump
+;
+; (gtk_accel_path "<camorama>/-Orphan/_About" "")
+; (gtk_accel_path "<camorama>/-Orphan/Prefere_nces" "")
+; (gtk_accel_path "<camorama>/-Orphan/_Quit" "<Primary>q")

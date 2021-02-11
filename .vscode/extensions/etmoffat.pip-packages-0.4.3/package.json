@@ -1,0 +1,110 @@
+{
+	"name": "pip-packages",
+	"displayName": "pip-packages",
+	"description": "Install/update pip packages into virtual environments",
+	"version": "0.4.3",
+	"publisher": "etmoffat",
+	"engines": {
+		"vscode": "^1.20.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:pip-updater.updateAndInstall",
+		"*"
+	],
+	"main": "./out/pip-updater",
+	"contributes": {
+		"commands": [
+			{
+				"command": "pip-updater.updateAndInstall",
+				"title": "pip-updater: Update and install pip packages"
+			},
+			{
+				"command": "pip-updater.reloadConfig",
+				"title": "pip-updater: Reload configuration"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Pip package installer configuration",
+			"properties": {
+				"pip-updater.AutoUpdate": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable or disable the automatic update check on launch of vscode"
+				},
+				"pip-updater.PackagesAndVersions": {
+					"type": "array",
+					"default": [],
+					"description": "Pip packages/versions to check",
+					"items": {
+						"type": "object",
+						"title": "Package name/version pair",
+						"properties": {
+							"packageName": {
+								"type": "string",
+								"description": "Name of the package"
+							},
+							"version": {
+								"type": "string",
+								"description": "Version of the package"
+							}
+						}
+					}
+				},
+				"pip-updater.Timeout": {
+					"type": "integer",
+					"default": 60000,
+					"description": "Default timeout for download and installation of a given pip package"
+				},
+				"pip-updater.VirtualEnv": {
+					"type": "array",
+					"default": [],
+					"description": "(optional) Virtual environment(s) in which pip packages should be installed/updated. Default is to use the default system environment and the default Python available in system PATH. If Python is not available in the PATH, this value is required.",
+					"items": {
+						"type": "object",
+						"title": "Pip virtual environment name and (optional) python executable to use",
+						"properties": {
+							"virtualEnv": {
+								"type": "string",
+								"description": "Name of the virtual environment (default is to use the default system environment, e.g. no environment)",
+								"default": ""
+							},
+							"pathToPython": {
+								"type": "string",
+								"description": "Path to the python binary to use (default is to use system python in PATH)",
+								"default": ""
+							},
+							"pathToEnvs": {
+								"type": "string",
+								"description": "Path to the directory that should contain the environments (default is to use ~/.virtualenvs or %USERPROFILE%\\envs",
+								"default": ""
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6",
+		"tslint": "^5.8.0",
+		"@types/node": "^7.0.43",
+		"@types/mocha": "^2.2.42"
+	},
+	"__metadata": {
+		"id": "5602a53d-10ca-4465-8d15-23e078291458",
+		"publisherId": "3af5c16d-728f-408b-8b90-b948058a2e72",
+		"publisherDisplayName": "etmoffat"
+	}
+}
